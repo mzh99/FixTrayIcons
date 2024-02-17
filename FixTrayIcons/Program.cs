@@ -20,6 +20,8 @@ namespace FixTrayIcons {
 
       public static readonly string RegMainKeyPath = "Control Panel\\NotifyIconSettings";
 
+      public static readonly string RegistrySecurityExceptMsg = "Cannot open registry key where Tray Icons settings are stored. Are you running as Admin?";
+
       private static CmdLine cmdLineParser;
       private static RunParms runParms;
 
@@ -95,7 +97,7 @@ namespace FixTrayIcons {
                         int firstSlash = exePath.IndexOf(@"\");
                         string shortenedPath = firstSlash > 0 ? exePath.Substring(firstSlash) : exePath;
                         int isShownVal = (int) subkey.GetValue(RegKeyIsPromoted, 0);
-                        string isShownStr = isShownVal == 1 ? "Y" : "N";
+                        string isShownStr = isShownVal == 1 ? "Shown" : "Hidden";
                         if (runParms.UserAction == RunParms.ActionOpt_Display) {
                            Console.WriteLine($"{shortenedPath} = {isShownStr}");
                         }
@@ -118,7 +120,7 @@ namespace FixTrayIcons {
             }
          }
          catch (SecurityException) {
-            Console.WriteLine("Cannot open registry key where Tray Icons settings are stored. Are you running as Admin?");
+            Console.WriteLine(RegistrySecurityExceptMsg);
          }
       }
 
