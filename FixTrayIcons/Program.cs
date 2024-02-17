@@ -18,6 +18,8 @@ namespace FixTrayIcons {
       public static readonly string RegKeyIsPromoted = "IsPromoted";
       public static readonly string RegKeyExePath = "ExecutablePath";
 
+      public static readonly string RegMainKeyPath = "Control Panel\\NotifyIconSettings";
+
       private static CmdLine cmdLineParser;
       private static RunParms runParms;
 
@@ -78,9 +80,9 @@ namespace FixTrayIcons {
       /// <remarks>If this gets too large, it should be moved to its own class</remarks>
       private static void UpdateTraySettings() {
          try {
-            using (RegistryKey mainTrayKey = Registry.CurrentUser.OpenSubKey("Control Panel\\NotifyIconSettings", true)) {
+            using (RegistryKey mainTrayKey = Registry.CurrentUser.OpenSubKey(RegMainKeyPath, true)) {
                if (mainTrayKey == null) {
-                  Console.WriteLine("Registry key where Tray Icons settings are stored is not found. Is this Win11 and are you running as Admin?");
+                  Console.WriteLine("Registry path where Tray Icons settings are stored is not found.");
                }
                else {
                   int updatedCount = 0;
