@@ -72,7 +72,7 @@ namespace FixTrayIcons {
 
       private static bool IsWin11OrGreater() {
          return true;
-         // Note: this doesn't work reliably as MS has depracated some calls and changed the results of others.
+         // Note: this doesn't work reliably as MS has deprecated some calls and changed the results of others.
          // Todo: update if MS ever gets their $hit together.
          // Console.WriteLine($"Build: {Environment.OSVersion.Version.Build}");
          // return Environment.OSVersion.Version.Build >= 22000;
